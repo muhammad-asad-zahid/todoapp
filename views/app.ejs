@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Todo App</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f2f4f8;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 30px auto;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 20px;
+        }
+
+        /* USER CARD */
+        .user-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+        }
+
+        .user-card h2 {
+            margin-bottom: 10px;
+        }
+
+        .user-card p {
+            margin: 6px 0;
+            color: #555;
+        }
+
+        /* TODO CARD */
+        .todo-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+        }
+
+        .todo-form input,
+        .todo-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+
+        .todo-form button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        /* TASK LIST */
+        .task {
+            background: #f9fafc;
+            padding: 12px;
+            margin-top: 12px;
+            border-radius: 6px;
+        }
+
+        .task h4 {
+            margin-bottom: 5px;
+        }
+
+        .task p {
+            font-size: 14px;
+            color: #555;
+        }
+
+        .btns {
+            margin-top: 8px;
+            display: flex;
+            flex-direction: row;
+
+
+        }
+
+        .btns button {
+            border: none;
+            padding: 6px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            margin: 10px;
+        }
+
+        .edit {
+            background: #ffc107;
+        }
+
+        .update {
+            background: #28a745;
+            color: white;
+        }
+
+        .delete {
+            background: #dc3545;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- USER DETAILS -->
+        <div class="user-card">
+            <h2>User Details</h2>
+            <p><b>Name:</b>
+                <%= message.name %>
+            </p>
+            <p><b>Email:</b>
+                <%= message.email %>
+            </p>
+            <p><b>Role:</b> Todo User</p>
+        </div>
+
+        <!-- TODO SECTION -->
+        <div class="todo-card">
+            <h2>Todo App</h2>
+
+            <form class="todo-form" method="post" action="/todo/create">
+                <input type="text" name="title" placeholder="Task title">
+                <textarea name="description" placeholder="Task description"></textarea>
+                <input type="hidden" name="userEmail" value="<%= message.email %>">
+                <button>Add Task</button>
+            </form>
+
+            <!-- TASK -->
+            <div class="task">
+                <% for( let i=0 ; i < message.todo.length ; i++){%>
+                    <h4>
+                        <%= message.todo[i].title %>
+                    </h4>
+                    <p>
+                        <%= message.todo[i].description %>
+                    </p>
+                    <div class="btns">
+                        <form action="/todo/edit" method="get">
+                            <input type="hidden" name="id" value="<%= message.todo[i]._id %>">
+                            <button class="edit">Edit</button>
+                        </form>
+                        <form action="/todo/deleted" method="post">
+                            <input type="hidden" name="id" value="<%= message.todo[i]._id %>">
+                            <button class="delete">Delete</button>
+                        </form>
+
+                    </div>
+                    <% } %>
+            </div>
+
+
+        </div>
+    </div>
+
+</body>
+
+</html>

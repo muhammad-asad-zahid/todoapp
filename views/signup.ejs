@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Signup</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      height: 100vh;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .signup-box {
+      background: white;
+      padding: 30px;
+      width: 350px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    }
+
+    .signup-box h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .signup-box input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    .signup-box button {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      background: #667eea;
+      color: white;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .signup-box button:hover {
+      background: #5a67d8;
+    }
+
+    .signup-box p {
+      text-align: center;
+      margin-top: 15px;
+    }
+
+    .signup-box a {
+      color: #667eea;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="signup-box">
+    <h2>Signup</h2>
+  
+    <p> <%= message.message %></p>
+
+    
+    <form action="/user/signup" method="POST">
+      <input type="text" name="userName" placeholder="Enter Name" required>
+      <input type="email" name="userEmail" placeholder="Enter Email" required>
+      <input type="password" name="userPassword" placeholder="Enter Password" required>
+      
+      <button type="submit">Create Account</button>
+    </form>
+
+    <p>Already have an account? <a href="/user/login">Login</a></p>
+  </div>
+
+</body>
+</html>
